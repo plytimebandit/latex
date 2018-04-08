@@ -1,0 +1,85 @@
+\documentclass[12pt,oneside]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[babel,german=quotes]{csquotes}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, left=4cm, right=2cm, top=3cm, bottom=2.1cm]{geometry}
+\usepackage[scaled=.90]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Default Nomenclature
+\usepackage[intoc]{nomencl}
+\makenomenclature
+
+% Setter and getter for nomenclature
+\usepackage{expl3}
+\usepackage{xparse}
+\usepackage{ifthen}
+
+\ExplSyntaxOn
+\prop_new:N \g_nomenclature_props
+\prop_new:N \g_nomenclature_activation_props
+%
+\NewDocumentCommand{\NCSet}{mm}
+{
+  \nomenclature{#1}{#2}
+  \prop_gput:Nnn \g_nomenclature_props {#1} {#2}
+}
+%
+\NewDocumentCommand{\NCGet}{m}
+{\emph{
+    \ifthenelse{\equal{\prop_item:Nn \g_nomenclature_props {#1}}{}}
+    {
+        \textbf{ERROR:\space NOMENCLATURE\space \enquote{#1} \space NOT\space FOUND}
+    }{
+        \ifthenelse{\equal{\prop_item:Nn \g_nomenclature_activation_props {#1}}{true}}
+        {
+            #1
+        }{
+            \prop_gput:Nnn \g_nomenclature_activation_props {#1} {true}
+            \prop_item:Nn \g_nomenclature_props {#1}
+            \space(#1)
+        }
+    }
+}}
+\ExplSyntaxOff
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\printnomenclature
+\newpage
+
+%%%
+
+\NCSet{NCL}{My Nomenclature}
+\NCSet{AAA}{Tripple A}
+
+%
+
+\section{NCL}
+
+\NCGet{NCL}
+
+\NCGet{NCL}
+
+%
+
+\section{foo}
+
+\NCGet{foo}
+
+%
+
+\section{AAA}
+
+\NCGet{AAA}
+
+\NCGet{AAA}
+
+\NCGet{AAA}
+
+
+
+\end{document}

@@ -19,10 +19,11 @@
 \ExplSyntaxOn
 \prop_new:N \g_nomenclature_props
 \prop_new:N \g_nomenclature_activation_props
+\prop_new:N \g_nomenclature_full
 %
 \NewDocumentCommand{\NCSet}{mm}
 {
-  \nomenclature{#1}{#2}
+  \prop_gput:Nnn \g_nomenclature_full {#1} {\nomenclature{#1}{#2}}
   \prop_gput:Nnn \g_nomenclature_props {#1} {#2}
 }
 %
@@ -36,6 +37,7 @@
         {
             #1
         }{
+            \prop_item:Nn \g_nomenclature_full {#1}
             \prop_gput:Nnn \g_nomenclature_activation_props {#1} {true}
             \prop_item:Nn \g_nomenclature_props {#1}
             \space(#1)
@@ -55,6 +57,7 @@
 
 \NCSet{NCL}{My Nomenclature}
 \NCSet{AAA}{Tripple A}
+\NCSet{XYZ}{eX whY Zett}
 
 %
 
@@ -85,6 +88,12 @@ foo bar \NCGet{NCL} baz.
 \NCGet{AAA}
 
 foo bar \NCGet{AAA} baz.
+
+%
+
+\section{XXX}
+
+The nomenclature entry \emph{XYZ} is set but never used, so it's not added to the nomenclature.
 
 
 \end{document}

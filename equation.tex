@@ -1,0 +1,89 @@
+\documentclass[12pt,oneside]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[babel,german=quotes]{csquotes}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, left=4cm, right=2cm, top=3cm, bottom=2.1cm]{geometry}
+\usepackage[scaled=.90]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{float}
+\usepackage{mathptmx}
+\usepackage{amsmath}
+\usepackage[most]{tcolorbox}
+
+\newlength\mylength
+\newcommand{\equationintext}[3]{
+    \vspace{3mm}
+    \begin{myequation}
+    \begin{minipage}{\textwidth}
+    \caption{#1
+    \global\setlength\mylength\hangindent}
+    \begin{tcolorbox}[boxrule=1pt, arc=0pt, colback=white]
+    \begin{align}
+    #3
+    \end{align}
+    \end{tcolorbox}
+    \label{#2}
+    \end{minipage}
+    \end{myequation}
+}
+
+\floatstyle{plaintop}
+\newfloat{myequation}{H}{eq}
+\floatname{myequation}{Formel}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% Remove top spacing (empty first line) in aligns (equations) with headers
+\makeatletter
+\g@addto@macro{\normalsize}{%
+    \setlength{\abovedisplayskip}{0pt}
+    \setlength{\abovedisplayshortskip}{0pt}
+    \setlength{\belowdisplayskip}{0pt}
+    \setlength{\belowdisplayshortskip}{0pt}}
+\makeatother
+% Remove top spacing (empty first line) in aligns (equations) without headers
+\setlength{\abovedisplayskip}{0pt}
+
+
+% --- 1 ---
+
+\equationintext{My little Caption}{eq:eq1}{
+    \text{Long Text 1:}       &&   a &= i_2-i \\
+    \text{Text 2:}                &&   bbb &= j_2-j+34
+}
+
+
+% --- 2 ---
+
+\equationintext{My little Caption}{eq:eq2}{asdf}
+
+
+% --- 3 ---
+
+\begin{tcolorbox}[boxrule=1pt, arc=0pt, colback=white]
+\begin{align}
+asdf
+\end{align}
+\end{tcolorbox}
+
+
+% --- 4 ---
+
+\begin{tcolorbox}[boxrule=1pt, arc=0pt, colback=white]
+\begin{equation}
+asdf
+\end{equation}
+\end{tcolorbox}
+
+\end{document}
+
+
+
+
+
+

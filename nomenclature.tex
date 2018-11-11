@@ -9,6 +9,8 @@
 
 % Default Nomenclature
 \usepackage[intoc]{nomencl}
+\setlength{\nomlabelwidth}{.20\textwidth}
+\renewcommand{\nomlabel}[1]{#1 \dotfill}
 \makenomenclature
 
 % Setter and getter for nomenclature
@@ -21,9 +23,11 @@
 \prop_new:N \g_nomenclature_activation_props
 \prop_new:N \g_nomenclature_full
 %
-\NewDocumentCommand{\NCSet}{mm}
+\NewDocumentCommand{\NCSet}{mmg}
 {
-  \prop_gput:Nnn \g_nomenclature_full {#1} {\nomenclature{#1}{#2}}
+  \IfNoValueTF{#3}
+    {\prop_gput:Nnn \g_nomenclature_full {#1} {\nomenclature{#1}{#2}}}
+    {\prop_gput:Nnn \g_nomenclature_full {#1} {\nomenclature{#1}{#2,\space #3}}}
   \prop_gput:Nnn \g_nomenclature_props {#1} {#2}
 }
 %
@@ -58,8 +62,9 @@
 \NCSet{NCL}{My Nomenclature}
 \NCSet{AAA}{Tripple A}
 \NCSet{XYZ}{eX whY Zett}
+\NCSet{MORE}{It's not less}{This is an additional explanation}
 
-%
+%%%
 
 \section{NCL}
 
@@ -95,5 +100,12 @@ foo bar \NCGet{AAA} baz.
 
 The nomenclature entry \emph{XYZ} is set but never used, so it's not added to the nomenclature.
 
+%
+
+\section{MORE}
+
+This one fits perfectly into text but offers an extended description text in the nomenclature.
+
+\NCGet{MORE}
 
 \end{document}

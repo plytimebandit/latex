@@ -23,6 +23,14 @@
 \prop_new:N \g_nomenclature_activation_props
 \prop_new:N \g_nomenclature_full
 %
+\NewDocumentCommand{\NCSetForce}{mmg}{
+  \IfNoValueTF{#3}
+    {\nomenclature{#1}{#2}}
+    {\nomenclature{#1}{#2,\space #3}}
+  \prop_gput:Nnn \g_nomenclature_props {#1} {#2}
+  \prop_gput:Nnn \g_nomenclature_activation_props {#1} {true}
+}
+%
 \NewDocumentCommand{\NCSet}{mmg}
 {
   \IfNoValueTF{#3}
@@ -63,6 +71,8 @@
 \NCSet{AAA}{Tripple A}
 \NCSet{XYZ}{eX whY Zett}
 \NCSet{MORE}{It's not less}{This is an additional explanation}
+\NCSetForce{FORCE}{I was forced into the nomenclature}
+\NCSetForce{FORCETWO}{I also was forced into the nomenclature}{At least I was fetched}
 
 %%%
 
@@ -107,5 +117,13 @@ The nomenclature entry \emph{XYZ} is set but never used, so it's not added to th
 This one fits perfectly into text but offers an extended description text in the nomenclature.
 
 \NCGet{MORE}
+
+%
+
+\section{FORCE}
+
+The term \enquote{FORCE} was added to nomenclature but it has never been fetched.
+
+The term \NCGet{FORCETWO} was added to nomenclature and also was fetched.
 
 \end{document}

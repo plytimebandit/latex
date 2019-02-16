@@ -1,0 +1,58 @@
+\documentclass[12pt,oneside]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[babel,german=quotes]{csquotes}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, left=4cm, right=2cm, top=3cm, bottom=2.1cm]{geometry}
+\usepackage{amssymb}
+\usepackage{mathptmx}
+\usepackage{amsmath}
+\usepackage[scaled=.90]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{siunitx}
+\AtBeginDocument{\sisetup{
+  detect-all, % auto config
+  math-sf=\mathrm, % serif in equations
+  text-rm=\sffamily, % sans serif in text
+  locale = DE, % 1,000.99 -> 1.000,99
+  per-mode = symbol, % ms^-1 -> m/s
+}}
+
+
+\begin{document}
+
+\section{Inline}
+
+Show different representations of the number \enquote{123.45}. Sans serif font is used in text and serif inside math environments.
+
+\bigskip
+
+Num: \num{123.45}
+
+Math: $123.45$
+
+\section{Align}
+
+\begin{align}
+no formatting &= 123.45 \\
+num &= \num{123.45}
+\end{align}
+
+\section{Equation}
+
+\begin{equation}
+\begin{split}
+no formatting = 123.45 \\
+num = \num{123.45}
+\end{split}
+\end{equation}
+
+\section{Multiline}
+
+\begin{multline}
+no formatting = 123.45 \\
+num = \num{123.45}
+\end{multline}
+
+\end{document}

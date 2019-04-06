@@ -56,6 +56,19 @@
         }
     }
 }}
+% Same as NCGet but without activation check (needed for longtables)
+\NewDocumentCommand{\NCGetFull}{m}
+{\emph{
+    \ifthenelse{\equal{\prop_item:Nn \g_nomenclature_props {#1}}{}}
+    {
+        \textbf{ERROR:\space NOMENCLATURE\space \enquote{#1} \space NOT\space FOUND}
+    }{
+        \prop_item:Nn \g_nomenclature_full {#1}
+        \prop_gput:Nnn \g_nomenclature_activation_props {#1} {true}
+        \prop_item:Nn \g_nomenclature_props {#1}
+        \space(#1)
+    }
+}}
 \ExplSyntaxOff
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -71,6 +84,7 @@
 \NCSet{AAA}{Tripple A}
 \NCSet{XYZ}{eX whY Zett}
 \NCSet{MORE}{It's not less}{This is an additional explanation}
+\NCSet{FULL}{Description to the fullest}
 \NCSetForce{FORCE}{I was forced into the nomenclature}
 \NCSetForce{FORCETWO}{I also was forced into the nomenclature}{At least I was fetched}
 
@@ -125,5 +139,16 @@ This one fits perfectly into text but offers an extended description text in the
 The term \enquote{FORCE} was added to nomenclature but it has never been fetched.
 
 The term \NCGet{FORCETWO} was added to nomenclature and also was fetched.
+
+%
+
+\section{Full}
+
+Get full: \NCGet{FULL}
+
+Get full again: \NCGet{FULL}
+
+Get fullest: \NCGetFull{FULL}
+
 
 \end{document}

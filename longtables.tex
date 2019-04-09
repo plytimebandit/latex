@@ -1,0 +1,72 @@
+\documentclass[12pt,oneside]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[a5paper, landscape, left=2cm, right=1cm, top=1cm, bottom=1cm, includefoot]{geometry}
+\usepackage{array}
+\usepackage{float}
+\usepackage[font=bf, justification=raggedright, singlelinecheck=false]{caption}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{longtable,tabu}
+
+\usepackage[scaled=.90]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+
+
+
+\begin{document}
+
+\begingroup
+\renewcommand{\arraystretch}{1.3}%
+\setlength\belowtabulinesep{2mm}
+\begin{longtabu} to \textwidth {|X[-1]|X|}
+\caption{My Caption}\label{tab:label}\\
+\hline
+\rowcolor{lightgray}
+\textbf{A} & \textbf{B}
+\\
+\endfirsthead
+
+\hline
+\rowcolor{lightgray}
+\textbf{A} & \textbf{B}
+\endhead
+\hline
+
+one character
+    &
+x
+\\\hline
+
+long text
+    &
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+\\\hline
+
+long text with additional spacing
+    &
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.
+
+\\\hline
+
+new page after this
+    &
+x
+\\\hline
+
+long text
+    &
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.
+\\\hline
+
+long text
+    &
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
+\\\hline
+
+\end{longtabu}
+\endgroup
+
+\end{document}
